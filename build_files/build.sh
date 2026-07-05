@@ -13,8 +13,17 @@ set -ouex pipefail
 # dnf5 install -y tmux 
 
 # Install custom packages
-dnf5 -y install qemu-kvm
-dnf5 -y install libvirt
+RUN dnf5 -y install \
+qemu-kvm \
+libvirt
+
+RUN curl -sSf https://api.github.com/repos/Voxelum/x-minecraft-launcher/releases/latest \
+      -o /tmp/xmcl-release.json && \
+    XMCL_URL=$(jq -r '.assets[] | select(.name | test("^xmcl-.*-x86_64\\.rpm$")) | .browser_download_url' /tmp/xmcl-release.json) && \
+    curl -Lo /tmp/xmcl.rpm "${XMCL_URL}" && \
+    dnf5 -y install /tmp/xmcl.rpm && \
+    rm -f /tmp/xmcl.rpm /tmp/xmcl-release.json
+
 
 #### Example for enabling a System Unit File
 
