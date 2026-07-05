@@ -13,8 +13,8 @@ set -ouex pipefail
 # dnf5 install -y tmux 
 
 # Install custom packages
-RUN dnf5 -y install qemu-kvm
-RUN dnf5 -y install libvirt 
+dnf5 -y install qemu-kvm
+dnf5 -y install libvirt 
 
 #### Example for enabling a System Unit File
 
