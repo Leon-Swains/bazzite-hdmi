@@ -15,7 +15,6 @@ set -ouex pipefail
 # Install custom packages
 dnf5 -y install qemu-kvm
 dnf5 -y install libvirt
-dnf5 -y install openrgb
 
 #### Example for enabling a System Unit File
 
